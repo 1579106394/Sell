@@ -8,4 +8,9 @@
         <result column="type_flag" property="typeFlag"/>
     </resultMap>
 
+    <select id="getTypeList" resultMap="Type">
+        select * from type
+        where type_flag = 1
+    </select>
+
 </mapper>

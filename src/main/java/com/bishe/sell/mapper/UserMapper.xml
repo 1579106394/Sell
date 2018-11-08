@@ -6,11 +6,27 @@
         <id column="user_id" property="userId"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
-        <result column="user_email" property="userEmai"/>
+        <result column="user_niko" property="userNiko" />
+        <result column="user_email" property="userEmail"/>
         <result column="user_sex" property="userSex"/>
         <result column="user_telephone" property="userTelephone"/>
         <result column="user_role" property="userRole"/>
         <result column="user_flag" property="userFlag"/>
     </resultMap>
+
+    <select id="getUserByUsername" parameterType="user" resultMap="User">
+        select * from user
+        where user_flag = 1
+        and username = #{username}
+    </select>
+
+    <insert id="addUser" parameterType="user">
+      insert into user values
+      (
+        #{userId}, #{username}, #{password}, #{userNiko},
+        #{userEmail}, #{userSex}, #{userTelephone},
+        #{userRole}, #{userFlag}
+      )
+    </insert>
 
 </mapper>

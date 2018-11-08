@@ -26,20 +26,30 @@
         <div class="panel panel-default">
             <div class="panel-heading">用户注册</div>
             <div class="panel-body">
-                <form action="">
+                <form action="${pageContext.request.contextPath}/api/user/register.html" method="post">
                     <div class="input-group">
                         <span class="input-group-addon" id="sizing-addon1">用户名</span>
-                        <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+                        <input type="text" class="form-control" name="username" placeholder="请输入账号" aria-describedby="sizing-addon1">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon" id="sizing-addon2">&nbsp;密&nbsp;码&nbsp;&nbsp;</span>
-                        <input type="text" class="form-control" placeholder="password" aria-describedby="sizing-addon2">
+                        <input type="password" class="form-control" name="password" placeholder="请输入密码" aria-describedby="sizing-addon2">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon6">&nbsp;昵&nbsp;称&nbsp;&nbsp;</span>
+                        <input type="text" class="form-control" name="userNiko" placeholder="请输入昵称" aria-describedby="sizing-addon6">
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon" id="sizing-addon3">&nbsp;邮&nbsp;箱&nbsp;&nbsp;</span>
-                        <input type="text" class="form-control" placeholder="email" aria-describedby="sizing-addon3">
+                        <input type="text" class="form-control" name="userEmail" placeholder="请输入邮箱" aria-describedby="sizing-addon3">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon5">手机号</span>
+                        <input type="text" class="form-control" name="userTelephone" placeholder="请输入手机号" aria-describedby="sizing-addon5">
                     </div>
                     <br>
                     <div class="input-group">
@@ -48,19 +58,21 @@
                             <label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 男
+                                    <input type="radio" name="userSex" id="inlineRadio1" value="1"> 男
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 女
+                                    <input type="radio" name="userSex" id="inlineRadio2" value="2"> 女
                                 </label>
                             </label>
                         </div>
                     </div>
                     <br>
 
+                    <span style="color:red;">${error}</span>
+
                     <br>
-                    <a class="btn btn-primary">登录</a>
-                    <a class="btn btn-primary">注册</a>
+                    <a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-primary">登录</a>
+                    <button type="submit" class="btn btn-primary">注册</button>
                 </form>
             </div>
         </div>

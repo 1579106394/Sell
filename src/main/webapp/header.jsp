@@ -6,13 +6,24 @@
 
 <!-- 顶部 -->
 <div class="header">
-    <img src="img/logo.png" class="header-logo">
+    <img src="${pageContext.request.contextPath}/img/logo.png" class="header-logo">
     <span class="header-title">中 国 拍 卖 网</span>
 
-    <div class="btn-group">
-        <a href="" class="btn btn-default">登录</a>
-        <a href="" class="btn btn-default">注册</a>
-    </div>
+
+        <div class="btn-group">
+            <c:if test="${sessionScope.user == null}">
+            <a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-default">登录</a>
+            <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-default">注册</a>
+            </c:if>
+            <c:if test="${sessionScope.user != null}">
+                <a class="btn btn-default">${sessionScope.user.userNiko}</a>
+                <a href="${pageContext.request.contextPath}/admin/index.jsp" class="btn btn-default">后台管理</a>
+                <a href="${pageContext.request.contextPath}/api/user/logout.html" class="btn btn-default">注销</a>
+            </c:if>
+        </div>
+
+
+
 
 </div>
 <!-- 顶部结束 -->
@@ -26,21 +37,13 @@
                     <li>
                         <a href="#" style="color: #ffd797;">网站首页</a>
                     </li>
-                    <li>
-                        <a href="#" style="color: #ffd797;">书画名酒</a>
-                    </li>
-                    <li>
-                        <a href="#" style="color: #ffd797;">二手市场</a>
-                    </li>
-                    <li>
-                        <a href="#" style="color: #ffd797;">古董古玩</a>
-                    </li>
-                    <li>
-                        <a href="#" style="color: #ffd797;">房产汽车</a>
-                    </li>
-                    <li>
-                        <a href="#" style="color: #ffd797;">知识产权</a>
-                    </li>
+
+                    <c:forEach items="${sessionScope.typeList}" var="type">
+                        <li>
+                            <a href="${pageContext.request.contextPath}/goods/goodsList/${type.typeId}.html" style="color: #ffd797;">${type.typeName}</a>
+                        </li>
+                    </c:forEach>
+
                     <li>
                         <a href="#" style="color: #ffd797;">联系我们</a>
                     </li>

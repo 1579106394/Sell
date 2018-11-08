@@ -7,6 +7,7 @@ import java.io.Serializable;
  *   `user_id` varchar(36) NOT NULL,
  *   `username` varchar(36) NOT NULL,
  *   `password` varchar(36) NOT NULL,
+ *   `user_niko` varchar(36) NOT NULL DEFAULT '小萌新' COMMENT '昵称',
  *   `user_email` varchar(36) NOT NULL,
  *   `user_sex` int(2) NOT NULL DEFAULT '1' COMMENT '1男2女',
  *   `user_telephone` bigint(12) DEFAULT NULL COMMENT '手机号',
@@ -21,9 +22,10 @@ public class User implements Serializable {
     private String userId;
     private String username;
     private String password;
+    private String userNiko;
     private String userEmail;
     private Integer userSex;
-    private Long user_telephone;
+    private Long userTelephone;
     private Integer userRole;
     private Integer userFlag;
 
@@ -51,6 +53,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getUserNiko() {
+        return userNiko;
+    }
+
+    public void setUserNiko(String userNiko) {
+        this.userNiko = userNiko;
+    }
+
     public String getUserEmail() {
         return userEmail;
     }
@@ -67,12 +77,12 @@ public class User implements Serializable {
         this.userSex = userSex;
     }
 
-    public Long getUser_telephone() {
-        return user_telephone;
+    public Long getUserTelephone() {
+        return userTelephone;
     }
 
-    public void setUser_telephone(Long user_telephone) {
-        this.user_telephone = user_telephone;
+    public void setUserTelephone(Long userTelephone) {
+        this.userTelephone = userTelephone;
     }
 
     public Integer getUserRole() {

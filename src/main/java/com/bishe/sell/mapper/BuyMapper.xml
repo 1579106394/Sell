@@ -33,7 +33,8 @@
             <id column="user_id" property="userId"/>
             <result column="username" property="username"/>
             <result column="password" property="password"/>
-            <result column="user_email" property="userEmai"/>
+            <result column="user_niko" property="userNiko" />
+            <result column="user_email" property="userEmail"/>
             <result column="user_sex" property="userSex"/>
             <result column="user_telephone" property="userTelephone"/>
             <result column="user_role" property="userRole"/>
@@ -44,7 +45,8 @@
             <id column="user_id" property="userId"/>
             <result column="username" property="username"/>
             <result column="password" property="password"/>
-            <result column="user_email" property="userEmai"/>
+            <result column="user_niko" property="userNiko" />
+            <result column="user_email" property="userEmail"/>
             <result column="user_sex" property="userSex"/>
             <result column="user_telephone" property="userTelephone"/>
             <result column="user_role" property="userRole"/>

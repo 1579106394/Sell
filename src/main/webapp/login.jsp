@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -26,18 +26,24 @@
         <div class="panel panel-default">
             <div class="panel-heading">用户登录</div>
             <div class="panel-body">
-                <div class="input-group">
-                    <span class="input-group-addon" id="sizing-addon1">用户名</span>
-                    <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="input-group-addon" id="sizing-addon2">&nbsp;密&nbsp;码&nbsp;&nbsp;</span>
-                    <input type="text" class="form-control" placeholder="password" aria-describedby="sizing-addon2">
-                </div>
-                <br>
-                <a class="btn btn-primary">登录</a>
-                <a class="btn btn-primary">注册</a>
+                <form action="${pageContext.request.contextPath}/api/user/login.html" method="post">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon1">用户名</span>
+                        <input type="text" class="form-control" name="username" placeholder="请输入账号" aria-describedby="sizing-addon1">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon2">&nbsp;密&nbsp;码&nbsp;&nbsp;</span>
+                        <input type="password" class="form-control" name="password" placeholder="请输入密码" aria-describedby="sizing-addon2">
+                    </div>
+                    <br>
+
+                    <span style="color:red;">${error}</span>
+
+                    <br>
+                    <button type="submit" class="btn btn-primary">登录</button>
+                    <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-primary">注册</a>
+                </form>
             </div>
         </div>
 
