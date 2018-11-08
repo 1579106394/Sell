@@ -8,6 +8,7 @@ import java.io.Serializable;
  *   `username` varchar(36) NOT NULL,
  *   `password` varchar(36) NOT NULL,
  *   `user_niko` varchar(36) NOT NULL DEFAULT '小萌新' COMMENT '昵称',
+ *   `user_img` varchar(50) DEFAULT NULL COMMENT '用户头像',
  *   `user_email` varchar(36) NOT NULL,
  *   `user_sex` int(2) NOT NULL DEFAULT '1' COMMENT '1男2女',
  *   `user_telephone` bigint(12) DEFAULT NULL COMMENT '手机号',
@@ -23,6 +24,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String userNiko;
+    private String userImg;
     private String userEmail;
     private Integer userSex;
     private Long userTelephone;
@@ -59,6 +61,14 @@ public class User implements Serializable {
 
     public void setUserNiko(String userNiko) {
         this.userNiko = userNiko;
+    }
+
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
     }
 
     public String getUserEmail() {

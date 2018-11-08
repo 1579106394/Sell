@@ -16,23 +16,26 @@
 <body>
 <div class="header" >
   <div class="main">
-    <a  href="index.jsp"  style="margin-left: 30px;line-height: 65px; color: white;font-size: 18px;">通用的管理系统后台</a>
+    <a  href="index.jsp"  style="margin-left: 30px;line-height: 65px; color: white;font-size: 18px;">中国拍卖网系统后台</a>
     <div class="nav">
-    
+
     </div>
-    
-    <div class="nav-user">      
+
+    <div class="nav-user">
       <!-- 登入后的状态 -->
-      
-      <a class="avatar" href="index.jsp">
-        <img src="res/images/8.jpg">
-        <cite style="color: white;">管理员</cite>
-        <i style="color: white;">退出</i>
-      </a>
-      <div class="nav">
-        <a href="set.jsp"><i class="iconfont icon-shezhi"></i>设置</a>
-        <a href="login.html"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
-      </div>
+        <a class="avatar" href="javascript:void(0)">
+        <img src="${pageContext.request.contextPath}/${sessionScope.user.userImg}">
+        <c:if test="${sessionScope.user.userFlag == 1}">
+            <cite style="color: white;">用户</cite>
+        </c:if>
+        <c:if test="${sessionScope.user.userFlag == 2}">
+            <cite style="color: white;">管理员</cite>
+        </c:if>
+        </a>
+        <div class="nav">
+            <a href="${pageContext.request.contextPath}/api/user/logout.html"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
+        </div>
+
     </div>
   </div>
 </div>
@@ -42,7 +45,7 @@
 		<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
 			<li class="layui-nav-item layui-this" ><a href="index.jsp"> <i
 					class="layui-icon">&#xe609;</i> 分类管理 </a></li>
-					
+
 								<li class="layui-nav-item "><a href="role.jsp" target="right"> <i
 					class="layui-icon">&#xe612;</i> 新闻中心</a></li>
 			<li class="layui-nav-item "><a href="user.jsp" target="right"> <i
@@ -66,10 +69,10 @@
 
 		<div class="fly-panel fly-panel-user">
 			<div class="layui-tab layui-tab-brief" lay-filter="user">
-				
+
 				<div class="layui-tab-content" style="padding: 20px;padding-top: 0px;">
     					<iframe src="newsType.jsp" width="85%" style="border: none;" height="800" border="none" name="right"></iframe>
-					</div>					
+					</div>
 				</div>
 			</div>
 		</div>
