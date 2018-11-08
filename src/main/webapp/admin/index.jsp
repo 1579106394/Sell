@@ -1,5 +1,7 @@
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
   <meta charset="utf-8">
@@ -14,7 +16,7 @@
 <body>
 <div class="header" >
   <div class="main">
-    <a  href="index.html"  style="margin-left: 30px;line-height: 65px; color: white;font-size: 18px;">通用的管理系统后台</a>
+    <a  href="index.jsp"  style="margin-left: 30px;line-height: 65px; color: white;font-size: 18px;">通用的管理系统后台</a>
     <div class="nav">
     
     </div>
@@ -22,13 +24,13 @@
     <div class="nav-user">      
       <!-- 登入后的状态 -->
       
-      <a class="avatar" href="index.html">
+      <a class="avatar" href="index.jsp">
         <img src="res/images/8.jpg">
         <cite style="color: white;">管理员</cite>
         <i style="color: white;">退出</i>
       </a>
       <div class="nav">
-        <a href="set.html"><i class="iconfont icon-shezhi"></i>设置</a>
+        <a href="set.jsp"><i class="iconfont icon-shezhi"></i>设置</a>
         <a href="login.html"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退了</a>
       </div>
     </div>
@@ -38,22 +40,22 @@
 
 	<div class="main fly-user-main layui-clear">
 		<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
-			<li class="layui-nav-item layui-this" ><a href="index.html"> <i
+			<li class="layui-nav-item layui-this" ><a href="index.jsp"> <i
 					class="layui-icon">&#xe609;</i> 分类管理 </a></li>
 					
-								<li class="layui-nav-item "><a href="role.html" target="right"> <i
+								<li class="layui-nav-item "><a href="role.jsp" target="right"> <i
 					class="layui-icon">&#xe612;</i> 新闻中心</a></li>
-			<li class="layui-nav-item "><a href="user.html" target="right"> <i
+			<li class="layui-nav-item "><a href="user.jsp" target="right"> <i
 					class="layui-icon">&#xe612;</i> 商品管理</a></li>
-						<li class="layui-nav-item"><a href="newsType.html" target="right"> <i
+						<li class="layui-nav-item"><a href="newsType.jsp" target="right"> <i
 					class="layui-icon">&#xe611;</i> 出价历史 </a></li>
-			<li class="layui-nav-item "><a href="news.html" target="right"> <i
+			<li class="layui-nav-item "><a href="news.jsp" target="right"> <i
 					class="layui-icon">&#xe611;</i> 商品评论</a></li>
 			<li class="layui-nav-item  "><a href="javascript:void(0)" onclick="updatePwd('修改密码',2)"> <i
 					class="layui-icon">&#xe620;</i> 交易历史 </a></li>
-						<li class="layui-nav-item "><a href="charts-1.html" target="right"> <i
+						<li class="layui-nav-item "><a href="charts-1.jsp" target="right"> <i
 					class="layui-icon">&#xe61a;</i> 用户管理 </a></li>
-				<li class="layui-nav-item "><a href="404.html" target="right"> <i
+				<li class="layui-nav-item "><a href="404.jsp" target="right"> <i
 					class="layui-icon">&#xe61a;</i> 404错误页面 </a></li>
 		</ul>
 
@@ -66,7 +68,7 @@
 			<div class="layui-tab layui-tab-brief" lay-filter="user">
 				
 				<div class="layui-tab-content" style="padding: 20px;padding-top: 0px;">
-    					<iframe src="newsType.html" width="85%" style="border: none;" height="800" border="none" name="right"></iframe>
+    					<iframe src="newsType.jsp" width="85%" style="border: none;" height="800" border="none" name="right"></iframe>
 					</div>					
 				</div>
 			</div>

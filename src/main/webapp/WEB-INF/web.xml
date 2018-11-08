@@ -7,7 +7,6 @@
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
-        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
 
@@ -56,10 +55,10 @@
         </init-param>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
-        <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>springmvc</servlet-name>-->
+        <!--<url-pattern>*.html</url-pattern>-->
+    <!--</servlet-mapping>-->
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>*.action</url-pattern>

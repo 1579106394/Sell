@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bishe.sell.mapper.NewsMapper">
+
+    <resultMap id="News" type="news">
+        <id column="news_id" property="newsId"/>
+        <result column="news_title" property="newsTitle"/>
+        <result column="news_article" property="newsArticle"/>
+        <result column="news_created_time" property="newsCreatedTime"/>
+        <result column="news_read_num" property="newsReadNum"/>
+        <result column="news_flag" property="newsFlag"/>
+        <association property="user" javaType="user">
+            <id column="user_id" property="userId"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+            <result column="user_email" property="userEmai"/>
+            <result column="user_sex" property="userSex"/>
+            <result column="user_telephone" property="userTelephone"/>
+            <result column="user_role" property="userRole"/>
+            <result column="user_flag" property="userFlag"/>
+        </association>
+
+    </resultMap>
+
+</mapper>

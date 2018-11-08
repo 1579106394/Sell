@@ -1,4 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,7 +21,7 @@
 			<h4>很抱歉！没有找到您要访问的页面！</h4>
 			<p><span id="num">5</span> 秒后将自动跳转到首页</p>
 			<div>
-				<a href="role.html" title="返回首页">返回首页</a>
+				<a href="role.jsp" title="返回首页">返回首页</a>
 				<a href="javascript:;" title="上一步" id="reload-btn">上一步</a>
 			</div>
 		</div>

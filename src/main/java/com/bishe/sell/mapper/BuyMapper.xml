@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bishe.sell.mapper.BuyMapper">
+
+    <resultMap id="Buy" type="buy">
+        <id column="buy_id" property="buyId" />
+        <result column="buy_flag" property="buyFlag" />
+
+        <association property="goods" javaType="goods">
+            <id column="goods_id" property="goodsId"/>
+            <result column="goods_created_time" property="goodsCreatedTime"/>
+            <result column="goods_started_time" property="goodsStartedTime"/>
+            <result column="goods_end_time" property="goodsEndTime"/>
+            <result column="goods_price" property="goodsPrice"/>
+            <result column="goods_current_price" property="goodsCurrentPrice"/>
+            <result column="goods_started_price" property="goodsStartedPrice"/>
+            <result column="goods_price_num" property="goodsPriceNum"/>
+            <result column="goods_click_num" property="goodsClickNum"/>
+            <result column="goods_title" property="goodsTitle"/>
+            <result column="goods_img" property="goodsImg"/>
+            <result column="goods_article" property="goodsArticle"/>
+            <result column="goods_brief" property="goodsBrief"/>
+            <result column="goods_flag" property="goodsFlag"/>
+
+            <association property="type" javaType="type">
+                <id column="type_id" property="typeId"/>
+                <result column="type_name" property="typeName"/>
+                <result column="type_flag" property="typeFlag"/>
+            </association>
+        </association>
+
+        <association property="buyer" javaType="user">
+            <id column="user_id" property="userId"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+            <result column="user_email" property="userEmai"/>
+            <result column="user_sex" property="userSex"/>
+            <result column="user_telephone" property="userTelephone"/>
+            <result column="user_role" property="userRole"/>
+            <result column="user_flag" property="userFlag"/>
+        </association>
+
+        <association property="seller" javaType="user">
+            <id column="user_id" property="userId"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+            <result column="user_email" property="userEmai"/>
+            <result column="user_sex" property="userSex"/>
+            <result column="user_telephone" property="userTelephone"/>
+            <result column="user_role" property="userRole"/>
+            <result column="user_flag" property="userFlag"/>
+        </association>
+    </resultMap>
+
+</mapper>
