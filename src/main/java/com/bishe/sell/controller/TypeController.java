@@ -78,6 +78,11 @@ public class TypeController {
         return "admin/type/editType";
     }
 
+    /**
+     * 编辑分类
+     * @param type
+     * @return
+     */
     @RequestMapping("admin/editType.html")
     private String editType(Type type) {
 

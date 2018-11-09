@@ -9,7 +9,16 @@
     <title></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/res/css/amazeui.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/res/css/admin.css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/jquery-1.11.3.min.js"></script>
 </head>
+
+
+<script>
+    function newsList(p) {
+        $('#currentPage').val(p)
+        $('#form').submit()
+    }
+</script>
 
 <body>
 <div class="admin-content-body">
@@ -20,12 +29,15 @@
     </div>
 
     <hr>
-    <form class="am-form">
+    <form id="form" class="am-form" action="${pageContext.request.contextPath}/api/news/admin/newsList.html"
+          method="post">
+        <input id="currentPage" type="hidden" name="currentPage" value="${page.currentPage}"/>
         <div class="am-g">
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                        <a href="${pageContext.request.contextPath}/admin/news/addNews.jsp" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增
+                        <a href="${pageContext.request.contextPath}/admin/news/addNews.jsp"
+                           class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增
                         </a>
                     </div>
                 </div>
@@ -35,9 +47,9 @@
             </div>
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-input-group am-input-group-sm">
-                    <input type="text" class="am-form-field">
+                    <input type="text" name="search" value="${page.search}" class="am-form-field">
                     <span class="am-input-group-btn">
-            <button class="am-btn am-btn-default" type="button">搜索</button>
+            <button class="am-btn am-btn-default" type="submit">搜索</button>
           </span>
                 </div>
             </div>
@@ -47,67 +59,75 @@
 
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
+
                     <tr>
                         <th class="table-check"><input type="checkbox"></th>
-                        <th class="table-id">ID</th>
+                        <th class="table-id">编号</th>
                         <th class="table-title">标题</th>
-                        <th class="table-type">类别</th>
+                        <th class="table-type">阅读量</th>
                         <th class="table-author am-hide-sm-only">作者</th>
-                        <th class="table-date am-hide-sm-only">修改日期</th>
+                        <th class="table-date am-hide-sm-only">发布日期</th>
                         <th class="table-set">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>
-                            <a href="#">哈登献41分火箭下起三分雨</a>
-                        </td>
-                        <td>体育</td>
-                        <td class="am-hide-sm-only">管理员</td>
-                        <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                            class="am-icon-pencil-square-o"></span> 编辑
-                                    </button>
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                            class="am-icon-trash-o"></span> 删除
-                                    </button>
+                    <c:forEach items="${page.list}" var="news" varStatus="index">
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>${index.index+1}</td>
+                            <td>
+                                <a>${news.newsTitle}</a>
+                            </td>
+                            <td>${news.newsReadNum}</td>
+                            <td class="am-hide-sm-only">${news.user.userNiko}</td>
+                            <td class="am-hide-sm-only">${news.newsCreatedTime}</td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <a href="${pageContext.request.contextPath}/api/news/admin/toEdit/${news.newsId}.html"
+                                           class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                class="am-icon-pencil-square-o"></span> 编辑
+                                        </a>
+                                        <a href="${pageContext.request.contextPath}/api/news/admin/deleteNews/${news.newsId}.html"
+                                           class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                                class="am-icon-trash-o"></span> 删除
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <div class="am-cf">
-                    共 15 条记录
+                    共 ${page.totalCount} 条记录
                     <div class="am-fr">
                         <ul class="am-pagination">
-                            <li class="am-disabled">
-                                <a href="#">«</a>
-                            </li>
-                            <li class="am-active">
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">5</a>
-                            </li>
-                            <li>
-                                <a href="#">»</a>
-                            </li>
+
+                            <c:if test="${page.currentPage != 1}">
+                                <li>
+                                    <a href="javascript:void(0);" onclick="newsList(${page.currentPage - 1})">«</a>
+                                </li>
+                            </c:if>
+
+                            <c:forEach begin="1" end="${page.totalPage}" var="p">
+                                <c:if test="${page.currentPage == p}">
+                                    <li class="am-active">
+                                        <a>${p}</a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${page.currentPage != p}">
+                                    <li>
+                                        <a href="javascript:void(0);" onclick="newsList(${p})">${p}</a>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+
+                            <c:if test="${page.currentPage != page.totalPage}">
+                                <li>
+                                    <a href="javascript:void(0);" onclick="newsList(${page.currentPage + 1})">»</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>

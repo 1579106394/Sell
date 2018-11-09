@@ -24,4 +24,53 @@
 
     </resultMap>
 
+    <insert id="addNews" parameterType="news">
+        insert into news values
+        (
+          #{newsId}, #{user.userId}, #{newsTitle},
+          #{newsArticle}, #{newsCreatedTime},
+          #{newsReadNum}, #{newsFlag}
+        )
+    </insert>
+
+    <select id="getNewsList" parameterType="page" resultMap="News">
+        select * from news left JOIN user on news_user = user_id
+        where news_flag = 1
+        <if test="search != null and search != ''">
+            and news_title like '%${search}%'
+        </if>
+        order by news_created_time desc
+        limit #{index}, #{currentCount}
+    </select>
+
+    <select id="getNewsCount" parameterType="page" resultType="Integer">
+        select count(*) from news left JOIN user on news_user = user_id
+        where news_flag = 1
+        <if test="search != null and search != ''">
+           and news_title like '%${search}%'
+        </if>
+        order by news_created_time desc
+    </select>
+
+    <select id="getNewsById" resultMap="News">
+        select * from news left JOIN user on news_user = user_id
+        where news_flag = 1
+        and news_id = #{value}
+    </select>
+
+    <update id="deleteNewsById">
+        update news set
+        news_flag = 2
+        where news_id = #{value}
+    </update>
+
+    <update id="editNews" parameterType="news">
+        update news set
+        news_title = #{newsTitle},
+        news_user = #{user.userId},
+        news_article = #{newsArticle},
+        news_created_time = #{newsCreatedTime}
+        where news_id = #{newsId}
+    </update>
+
 </mapper>

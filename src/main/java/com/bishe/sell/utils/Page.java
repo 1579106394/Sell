@@ -27,6 +27,9 @@ public class Page<T> implements Serializable {
 	//参数
 	private Map<String, Object> params = new HashMap<String, Object>();
 
+	//搜索
+	private String search;
+
 	//每页显示的数据
 	private List<T> list = new ArrayList<T>();
 
@@ -128,4 +131,11 @@ public class Page<T> implements Serializable {
 		this.list = list;
 	}
 
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
 }

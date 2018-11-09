@@ -47,10 +47,10 @@
         <li class="layui-nav-item layui-this"><a href="${pageContext.request.contextPath}/api/type/admin/typeList.html" target="right"> <i
                 class="layui-icon">&#xe609;</i> 分类管理 </a></li>
 
-        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/admin/news/newsList.jsp" target="right"> <i
+        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/news/admin/newsList.html" target="right"> <i
                 class="layui-icon">&#xe63c;</i> 新闻中心</a></li>
         <li class="layui-nav-item "><a href="user.jsp" target="right"> <i
-                class="layui-icon">&#xe612;</i> 商品管理</a></li>
+                class="layui-icon">&#xe698;</i> 商品管理</a></li>
         <li class="layui-nav-item"><a href="typeList.jsp" target="right"> <i
                 class="layui-icon">&#xe611;</i> 出价历史 </a></li>
         <li class="layui-nav-item "><a href="news/newsList.jsp" target="right"> <i
@@ -59,8 +59,8 @@
                 class="layui-icon">&#xe620;</i> 交易历史 </a></li>
         <li class="layui-nav-item "><a href="charts-1.jsp" target="right"> <i
                 class="layui-icon">&#xe61a;</i> 用户管理 </a></li>
-        <li class="layui-nav-item "><a href="404.jsp" target="right"> <i
-                class="layui-icon">&#xe61a;</i> 404错误页面 </a></li>
+        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/user/admin/myinfo.html" target="right"> <i
+                class="layui-icon">&#xe66f;</i> 个人信息 </a></li>
     </ul>
 
     <div class="site-tree-mobile layui-hide">

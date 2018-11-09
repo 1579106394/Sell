@@ -34,7 +34,7 @@
 <body>
 <div class="admin-content-body">
     <div class="am-cf am-padding am-padding-bottom-0">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">发布新闻</strong>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">编辑新闻</strong>
             <small></small>
         </div>
     </div>
@@ -46,20 +46,21 @@
             <div class="admin-content-body">
                 <div class="am-g">
                     <form class="am-form am-form-horizontal" id="form"
-                          action="${pageContext.request.contextPath}/api/news/admin/addNews.html" method="post"
+                          action="${pageContext.request.contextPath}/api/news/admin/editNews.html" method="post"
                           style="padding-top: 30px;">
 
                         <!-- 富文本编辑器内容 -->
                         <input type="hidden" name="newsArticle" class="article"/>
                         <!-- 用户id -->
                         <input type="hidden" name="user.userId" value="${sessionScope.user.userId }"/>
+                        <input type="hidden" name="newsId" value="${news.newsId}"/>
 
                         <div class="am-form-group">
                             <label class="am-u-sm-2 am-form-label">
                                 新闻标题
                             </label>
                             <div class="am-u-sm-10">
-                                <input id="roleName" required="" placeholder="请输入新闻标题" value="" name="newsTitle"
+                                <input id="roleName" required="" placeholder="请输入新闻标题" value="${news.newsTitle}" name="newsTitle"
                                        type="text">
                             </div>
                         </div>
@@ -73,7 +74,7 @@
                                 <!-- 富文本编辑器 -->
 
                                 <div id="div1">
-
+                                    ${news.newsArticle}
                                 </div>
 
 
@@ -94,7 +95,7 @@
 
                         <div class="am-form-group">
                             <div class="am-u-sm-9 am-u-sm-push-2">
-                                <input class="am-btn am-btn-success" value="发布" type="button" onclick="formSubmit();">
+                                <input class="am-btn am-btn-success" value="编辑" type="button" onclick="formSubmit();">
                             </div>
                         </div>
                     </form>
