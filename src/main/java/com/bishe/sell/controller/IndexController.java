@@ -20,6 +20,12 @@ public class IndexController {
     @Autowired
     private TypeService typeService;
 
+    /**
+     * 首页
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "index.html", method = RequestMethod.GET)
     public String index(Model model, HttpSession session) {
 

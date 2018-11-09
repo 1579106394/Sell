@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +19,13 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "register.html", method = RequestMethod.POST)
+    /**
+     * 注册
+     * @param model
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "register.html")
     public String register(Model model, User user) {
 
         try {
@@ -42,7 +47,14 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value = "login.html", method = RequestMethod.POST)
+    /**
+     * 登录
+     * @param model
+     * @param user
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "login.html")
     public String login(Model model, User user, HttpSession session) {
 
         User u = userService.getUserByUsername(user);
@@ -64,7 +76,13 @@ public class LoginController {
         return "index";
     }
 
-    @RequestMapping(value = "logout.html", method = RequestMethod.GET)
+    /**
+     * 退出
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "logout.html")
     public String logout(Model model, HttpSession session) {
 
         session.removeAttribute("user");

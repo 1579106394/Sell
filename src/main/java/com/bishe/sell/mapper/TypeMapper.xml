@@ -13,4 +13,26 @@
         where type_flag = 1
     </select>
 
+    <insert id="addType" parameterType="type">
+        insert into type values
+        (#{typeId}, #{typeName}, #{typeFlag})
+    </insert>
+
+    <update id="deleteTypeById">
+        update type set
+        type_flag = 2
+        where type_id = #{value}
+    </update>
+
+    <select id="getTypeById" resultMap="Type">
+        select * from type
+        where type_id = #{value}
+    </select>
+
+    <update id="editType" parameterType="type">
+        update type set
+        type_name = #{typeName}
+        where type_id = #{typeId}
+    </update>
+
 </mapper>
