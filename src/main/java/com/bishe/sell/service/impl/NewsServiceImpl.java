@@ -43,8 +43,10 @@ public class NewsServiceImpl implements NewsService {
         if(p.getCurrentPage() == null) {
             p.setCurrentPage(1);
         }
-        // 每页显示10条
-        p.setCurrentCount(10);
+        if(p.getCurrentCount() == null) {
+            // 每页显示10条
+            p.setCurrentCount(10);
+        }
         // 索引
         p.setIndex((p.getCurrentPage() - 1) * p.getCurrentCount());
 

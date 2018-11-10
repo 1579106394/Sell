@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -18,7 +18,7 @@
 
 <body>
 
-<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp"/>
 
 <!-- 轮播图 -->
 <div id="carousel-example-generic" class="carousel slide header-slide" data-ride="carousel">
@@ -83,24 +83,15 @@
         </div>
         <div class="bottom">
             <ul class="list-group">
-                <li class="list-group-item">Cras justo odio
-                    <span class="date">2017-11-11</span>
-                </li>
-                <li class="list-group-item">Cras justo odio
-                    <span class="date">2017-11-11</span>
-                </li>
-                <li class="list-group-item">Cras justo odio
-                    <span class="date">2017-11-11</span>
-                </li>
-                <li class="list-group-item">Cras justo odio
-                    <span class="date">2017-11-11</span>
-                </li>
-                <li class="list-group-item">Cras justo odio
-                    <span class="date">2017-11-11</span>
-                </li>
-                <li class="list-group-item">Cras justo odio
-                    <span class="date">2017-11-11</span>
-                </li>
+
+                <c:forEach items="${newsPage.list }" var="news">
+                    <li class="list-group-item">
+                        <a href="${pageContext.request.contextPath}/api/news/readNews/${news.newsId}.html">
+                                ${news.newsTitle}
+                            <span class="date">${news.newsCreatedTime}</span>
+                        </a>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
     </div>
@@ -116,34 +107,17 @@
             <span>推荐拍品</span>
         </div>
         <div class="bottom">
-            <div class="lot">
-                <img src="${pageContext.request.contextPath}/img/s1.jpg" alt="">
-                <a href="">作品名称</a>
-            </div>
-            <div class="lot">
-                <img src="${pageContext.request.contextPath}/img/s1.jpg" alt="">
-                <a href="">作品名称</a>
-            </div>
-            <div class="lot">
-                <img src="${pageContext.request.contextPath}/img/s1.jpg" alt="">
-                <a href="">作品名称</a>
-            </div>
-            <div class="lot">
-                <img src="${pageContext.request.contextPath}/img/s1.jpg" alt="">
-                <a href="">作品名称</a>
-            </div>
-            <div class="lot">
-                <img src="${pageContext.request.contextPath}/img/s1.jpg" alt="">
-                <a href="">作品名称</a>
-            </div>
-            <div class="lot">
-                <img src="${pageContext.request.contextPath}/img/s1.jpg" alt="">
-                <a href="">作品名称</a>
-            </div>
-            <div class="lot">
-                <img src="img/s1.jpg" alt="">
-                <a href="">作品名称</a>
-            </div>
+
+            <c:forEach items="${goodsPage.list}" var="goods">
+
+                <div class="lot">
+                    <a href="${pageContext.request.contextPath}/api/goods/readGoods/${goods.goodsId}.html">
+                        <img src="${pageContext.request.contextPath}/${goods.goodsImg}" alt="">
+                            ${goods.goodsTitle}
+                    </a>
+                </div>
+
+            </c:forEach>
 
         </div>
     </div>
@@ -152,7 +126,7 @@
 
 
 <!-- 底部导航 -->
-<jsp:include page="footer.jsp" />
+<jsp:include page="footer.jsp"/>
 <!-- 底部导航结束 -->
 
 

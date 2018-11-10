@@ -123,7 +123,7 @@ td {
 .lot {
     width: 145px;
     float: left;
-    height: 200px;
+    min-height: 200px;
     margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 20px;

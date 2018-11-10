@@ -26,8 +26,8 @@
             <id column="user_id" property="userId"/>
             <result column="username" property="username"/>
             <result column="password" property="password"/>
-            <result column="user_niko" property="userNiko" />
-            <result column="user_img" property="userImg" />
+            <result column="user_niko" property="userNiko"/>
+            <result column="user_img" property="userImg"/>
             <result column="user_email" property="userEmail"/>
             <result column="user_sex" property="userSex"/>
             <result column="user_telephone" property="userTelephone"/>
@@ -35,5 +35,77 @@
             <result column="user_flag" property="userFlag"/>
         </association>
     </resultMap>
+
+    <select id="getGoodsList" parameterType="page" resultMap="Goods">
+        select * from goods LEFT JOIN type on
+        goods_type = type_id
+        LEFT JOIN user ON
+        goods_user = user_id
+        where goods_flag = 1
+        <if test="search != null and search != ''">
+            and goods_title like '%${search}%'
+        </if>
+        order by goods_created_time desc
+        limit #{index}, #{currentCount}
+    </select>
+
+    <select id="getGoodsCount" parameterType="page" resultType="Integer">
+        select count(*) from goods LEFT JOIN type on
+        goods_type = type_id
+        LEFT JOIN user ON
+        goods_user = user_id
+        where goods_flag = 1
+        <if test="search != null and search != ''">
+            and goods_title like '%${search}%'
+        </if>
+        order by goods_created_time desc
+    </select>
+
+    <insert id="addGoods" parameterType="Goods">
+        insert into goods values
+        (
+          #{goodsId}, #{user.userId}, #{type.typeId},
+          #{goodsCreatedTime}, #{goodsStartedTime},
+          #{goodsEndTime}, #{goodsPrice}, #{goodsCurrentPrice},
+          #{goodsStartedPrice}, #{goodsPriceNum},
+          #{goodsClickNum}, #{goodsTitle}, #{goodsImg},
+          #{goodsArticle}, #{goodsBrief}, #{goodsFlag}
+        )
+    </insert>
+
+    <update id="deleteGoodsById">
+        update goods set
+        goods_flag = 2
+        where goods_id = #{value}
+    </update>
+
+    <select id="getGoodsById" resultMap="Goods">
+        select * from goods LEFT JOIN type on
+        goods_type = type_id
+        LEFT JOIN user ON
+        goods_user = user_id
+        where goods_id = #{value}
+    </select>
+
+    <update id="editGoods" parameterType="Goods">
+        update goods set
+        goods_title = #{goodsTitle},
+        goods_type = #{type.typeId},
+        goods_started_time = #{goodsStartedTime},
+        goods_end_time = #{goodsEndTime},
+        goods_started_price = #{goodsStartedPrice},
+        <if test="goodsImg != null and goodsImg != ''">
+            goods_img = #{goodsImg},
+        </if>
+        goods_brief = #{goodsBrief},
+        goods_article = #{goodsArticle}
+        where goods_id = #{goodsId}
+    </update>
+
+    <update id="updateClickNum">
+        update goods set
+        goods_click_num = goods_click_num + 1
+        where goods_id = #{value}
+    </update>
 
 </mapper>

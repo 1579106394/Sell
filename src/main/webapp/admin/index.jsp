@@ -49,18 +49,18 @@
 
         <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/news/admin/newsList.html" target="right"> <i
                 class="layui-icon">&#xe63c;</i> 新闻中心</a></li>
-        <li class="layui-nav-item "><a href="user.jsp" target="right"> <i
+        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/goods/admin/goodsList.html" target="right"> <i
                 class="layui-icon">&#xe698;</i> 商品管理</a></li>
         <li class="layui-nav-item"><a href="typeList.jsp" target="right"> <i
-                class="layui-icon">&#xe611;</i> 出价历史 </a></li>
+                class="layui-icon">&#xe60e;</i> 出价历史 </a></li>
         <li class="layui-nav-item "><a href="news/newsList.jsp" target="right"> <i
                 class="layui-icon">&#xe611;</i> 商品评论</a></li>
         <li class="layui-nav-item  "><a href="javascript:void(0)" onclick="updatePwd('修改密码',2)"> <i
-                class="layui-icon">&#xe620;</i> 交易历史 </a></li>
-        <li class="layui-nav-item "><a href="charts-1.jsp" target="right"> <i
-                class="layui-icon">&#xe61a;</i> 用户管理 </a></li>
+                class="layui-icon">&#xe60e;</i> 交易历史 </a></li>
+        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/user/admin/userList.html" target="right"> <i
+                class="layui-icon">&#xe770;</i> 用户管理 </a></li>
         <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/user/admin/myinfo.html" target="right"> <i
-                class="layui-icon">&#xe66f;</i> 个人信息 </a></li>
+                class="layui-icon">&#xe716;</i> 个人信息 </a></li>
     </ul>
 
     <div class="site-tree-mobile layui-hide">
@@ -72,7 +72,7 @@
         <div class="layui-tab layui-tab-brief" lay-filter="user">
 
             <div class="layui-tab-content" style="padding: 20px;padding-top: 0px;">
-                <iframe width="85%" style="border: none;" height="800" border="none"
+                <iframe width="85%" style="border: none;" height="1000px" border="none"
                         name="right"></iframe>
             </div>
         </div>

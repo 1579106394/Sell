@@ -24,7 +24,7 @@ public class NewsController {
      * @return
      */
     @RequestMapping("admin/newsList.html")
-    public String newsList(Model model, Page p) {
+    public String newsList(Model model, Page<News> p) {
 
         p = newsService.getNewsList(p);
 
@@ -77,12 +77,33 @@ public class NewsController {
         return "admin/news/editNews";
     }
 
+    /**
+     * 编辑新闻
+     * @param news
+     * @return
+     */
     @RequestMapping("admin/editNews.html")
     public String editNews(News news) {
 
         newsService.editNews(news);
 
         return "redirect:/api/news/admin/newsList.html";
+    }
+
+    /**
+     * 阅读新闻
+     * @param model
+     * @param newsId
+     * @return
+     */
+    @RequestMapping("readNews/{newsId}.html")
+    public String readNews(Model model, @PathVariable String newsId) {
+
+        News news = newsService.getNewsById(newsId);
+
+        model.addAttribute("news", news);
+
+        return "news-read";
     }
 
 }

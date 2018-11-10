@@ -41,6 +41,7 @@ public class LoginController {
 
             return "login";
         } catch (Exception e) {
+            e.printStackTrace();
             model.addAttribute("error", "请填写所有项");
             return "register";
         }

@@ -73,4 +73,5 @@
         where news_id = #{newsId}
     </update>
 
+
 </mapper>

@@ -24,10 +24,55 @@
     <insert id="addUser" parameterType="user">
       insert into user values
       (
-        #{userId}, #{username}, #{password}, #{userNiko},
+        #{userId}, #{username}, #{password}, #{userNiko}, #{userImg},
         #{userEmail}, #{userSex}, #{userTelephone},
         #{userRole}, #{userFlag}
       )
     </insert>
+
+    <select id="getUser" parameterType="user" resultMap="User">
+        select * from user
+        where user_id = #{userId}
+    </select>
+
+    <update id="editUser" parameterType="user">
+        update user set
+        password = #{password},
+        user_niko = #{userNiko},
+        user_img = #{userImg},
+        user_email = #{userEmail},
+        user_sex = #{userSex},
+        user_telephone = #{userTelephone}
+        where user_id = #{userId}
+    </update>
+
+    <select id="getUserList" parameterType="page" resultMap="User">
+        select * from user
+        where user_flag = 1
+        <if test="search != null and search != ''">
+            and user_niko like '%${search}%'
+        </if>
+        limit #{index}, #{currentCount}
+    </select>
+
+    <select id="getUserCount" parameterType="page" resultType="Integer">
+        select count(*) from user
+        where user_flag = 1
+        <if test="search != null and search != ''">
+            and user_niko like '%${search}%'
+        </if>
+    </select>
+
+    <update id="deleteUserById">
+        update user set
+        user_flag = 2
+        where user_id = #{value}
+    </update>
+
+    <update id="updateUserAdminById" parameterType="user">
+        update user set
+        user_role = #{userRole}
+        where user_id = #{userId}
+    </update>
 
 </mapper>
