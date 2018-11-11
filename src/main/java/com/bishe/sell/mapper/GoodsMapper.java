@@ -27,4 +27,16 @@ public interface GoodsMapper {
 
     // 点击量+1
     void updateClickNum(String goodsId);
+
+    // 喊价之后更新一下当前价格和出价人数
+    void updateGoodsAfterAddPrice(Goods goods);
+
+    // 删除喊价历史之后更新一下当前喊价
+    void updateGoodsAfterDeleteHistory(Goods goods);
+
+    // 根据结束时间查询商品列表
+    List<Goods> getGoodsByEndTime(String time);
+
+    // 结束集合中商品的拍卖
+    void endGoods(List<Goods> goodsList);
 }

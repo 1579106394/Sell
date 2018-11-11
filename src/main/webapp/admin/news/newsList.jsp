@@ -30,7 +30,7 @@
 
     <hr>
     <form id="form" class="am-form" action="${pageContext.request.contextPath}/api/news/admin/newsList.html"
-          method="post">
+          method="post" enctype="application/x-www-form-urlencoded">
         <input id="currentPage" type="hidden" name="currentPage" value="${page.currentPage}"/>
         <div class="am-g">
             <div class="am-u-sm-12 am-u-md-6">
@@ -43,11 +43,11 @@
                 </div>
             </div>
             <div class="am-u-sm-12 am-u-md-3">
-
+                <input type="text" name="params[newsUser]" placeholder="请输入作者" value="${page.search}" class="am-form-field"/>
             </div>
             <div class="am-u-sm-12 am-u-md-3">
                 <div class="am-input-group am-input-group-sm">
-                    <input type="text" name="search" value="${page.search}" class="am-form-field">
+                    <input type="text" name="params[newsTitle]" placeholder="请输入新闻标题" value="${page.search}" class="am-form-field"/>
                     <span class="am-input-group-btn">
             <button class="am-btn am-btn-default" type="submit">搜索</button>
           </span>

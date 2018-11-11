@@ -2,7 +2,6 @@ package com.bishe.sell.controller;
 
 import com.bishe.sell.pojo.Goods;
 import com.bishe.sell.pojo.News;
-import com.bishe.sell.pojo.Type;
 import com.bishe.sell.service.GoodsService;
 import com.bishe.sell.service.NewsService;
 import com.bishe.sell.service.TypeService;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * 首页的Controller，用来加载页面时初始化一些数据
@@ -39,11 +37,6 @@ public class IndexController {
      */
     @RequestMapping(value = "index.html", method = RequestMethod.GET)
     public String index(Model model, HttpSession session) {
-
-        // 查询所有分类
-        List<Type> typeList = typeService.getTypeList();
-        session.setAttribute("typeList", typeList);
-
 
         // 查询新闻列表
         Page p1 = new Page();

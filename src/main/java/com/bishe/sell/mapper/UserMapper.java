@@ -30,4 +30,10 @@ public interface UserMapper {
 
     // 切换管理员与用户身份
     void updateUserAdminById(User u);
+
+    // 根据邮箱校验
+    User getUserByEmail(String userEmail);
+
+    // 根据手机号查询用户
+    User getUserByTelephone(Long userTelephone);
 }

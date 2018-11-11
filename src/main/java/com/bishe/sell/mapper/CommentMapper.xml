@@ -44,4 +44,53 @@
         </association>
     </resultMap>
 
+    <insert id="addComment" parameterType="comment">
+        insert into comment values
+        (
+          #{commentId}, #{user.userId}, #{goods.goodsId},
+          #{commentCreatedTime}, #{commentArticle}, #{commentFlag}
+        )
+    </insert>
+
+    <select id="getCommentListByGoodsId" resultMap="Comment">
+       select * from comment LEFT JOIN goods on comment_goods = goods_id
+        left JOIN user on comment_user = user_id
+        where comment_goods = #{value} and comment_flag = 1
+        order by comment_created_time desc
+        limit 0, 10
+    </select>
+
+    <select id="getCommentList" parameterType="page" resultMap="Comment">
+        select * from comment LEFT JOIN goods on comment_goods = goods_id
+        left JOIN user on comment_user = user_id
+        where comment_flag = 1
+        <if test="search != '' and search != null">
+            and comment_article like '%${search}%'
+        </if>
+        order by goods_created_time desc, comment_created_time desc
+        limit #{index}, #{currentCount}
+    </select>
+
+    <select id="getCommentCount" parameterType="page" resultType="Integer">
+        select count(*) from comment LEFT JOIN goods on comment_goods = goods_id
+        left JOIN user on comment_user = user_id
+        where comment_flag = 1
+        <if test="search != '' and search != null">
+            and comment_article like '%${search}%'
+        </if>
+        order by goods_created_time desc, comment_created_time desc
+    </select>
+
+    <update id="deleteCommentById">
+        update comment set
+        comment_flag = 2
+        where comment_id = #{value}
+    </update>
+
+    <select id="getAllCommentList" resultMap="Comment">
+        select * from comment LEFT JOIN goods on comment_goods = goods_id
+        left JOIN user on comment_user = user_id
+        where comment_flag = 1
+    </select>
+
 </mapper>

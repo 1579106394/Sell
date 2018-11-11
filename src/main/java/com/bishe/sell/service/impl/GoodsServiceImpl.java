@@ -34,7 +34,7 @@ public class GoodsServiceImpl implements GoodsService {
         p.setIndex((p.getCurrentPage() - 1) * p.getCurrentCount());
 
         //查询数据
-        List<Goods> newsList = goodsMapper.getGoodsList(p);
+        List<Goods> goodsList = goodsMapper.getGoodsList(p);
 
         //查询总条数
         Integer totalCount = goodsMapper.getGoodsCount(p);
@@ -42,8 +42,8 @@ public class GoodsServiceImpl implements GoodsService {
         //总条数
         p.setTotalCount(totalCount);
         //总页数
-        p.setTotalPage((int) Math.ceil(totalCount / 10.0));
-        p.setList(newsList);
+        p.setTotalPage((int) Math.ceil(totalCount * 1.0 / p.getCurrentCount()));
+        p.setList(goodsList);
 
         return p;
     }
@@ -82,5 +82,15 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void updateClickNum(String goodsId) {
         goodsMapper.updateClickNum(goodsId);
+    }
+
+    @Override
+    public List<Goods> getGoodsByEndTime(String time) {
+        return goodsMapper.getGoodsByEndTime(time);
+    }
+
+    @Override
+    public void endGoods(List<Goods> goodsList) {
+        goodsMapper.endGoods(goodsList);
     }
 }

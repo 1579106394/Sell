@@ -42,8 +42,17 @@
         LEFT JOIN user ON
         goods_user = user_id
         where goods_flag = 1
-        <if test="search != null and search != ''">
-            and goods_title like '%${search}%'
+
+        <if test="params != null">
+            <if test="params.typeId != null and params.typeId != ''">
+                and goods_type = #{params.typeId}
+            </if>
+            <if test="params.goodsUser != null and params.goodsUser != ''">
+                and user_niko like '%${params.goodsUser}%'
+            </if>
+            <if test="params.goodsTitle != null and params.goodsUser != ''">
+                and goods_title like '%${params.goodsTitle}%'
+            </if>
         </if>
         order by goods_created_time desc
         limit #{index}, #{currentCount}
@@ -55,8 +64,16 @@
         LEFT JOIN user ON
         goods_user = user_id
         where goods_flag = 1
-        <if test="search != null and search != ''">
-            and goods_title like '%${search}%'
+        <if test="params != null">
+            <if test="params.typeId != null and params.typeId != ''">
+                and goods_type = #{params.typeId}
+            </if>
+            <if test="params.goodsUser != null and params.goodsUser != ''">
+                and user_niko like '%${params.goodsUser}%'
+            </if>
+            <if test="params.goodsTitle != null and params.goodsUser != ''">
+                and goods_title like '%${params.goodsTitle}%'
+            </if>
         </if>
         order by goods_created_time desc
     </select>
@@ -106,6 +123,34 @@
         update goods set
         goods_click_num = goods_click_num + 1
         where goods_id = #{value}
+    </update>
+
+    <update id="updateGoodsAfterAddPrice" parameterType="goods">
+        update goods set
+        goods_current_price = #{goodsCurrentPrice},
+        goods_price_num = goods_price_num + 1
+        where goods_id = #{goodsId}
+    </update>
+
+    <update id="updateGoodsAfterDeleteHistory" parameterType="goods">
+        update goods set
+        goods_current_price = #{goodsCurrentPrice}
+        where goods_id = #{goodsId}
+    </update>
+
+    <select id="getGoodsByEndTime" resultMap="Goods">
+        select * from goods
+        where goods_flag = 1
+        and goods_end_time &lt;= #{value}
+    </select>
+
+    <update id="endGoods" parameterType="List">
+        update goods set
+        goods_flag = 3
+        where goods_id in
+        <foreach collection="list" item="goods" separator="," open="(" close=")">
+            #{goods.goodsId}
+        </foreach>
     </update>
 
 </mapper>

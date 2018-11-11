@@ -88,4 +88,14 @@ public class UserServiceImpl implements UserService {
         }
         userMapper.updateUserAdminById(u);
     }
+
+    @Override
+    public User getUserByEmail(String userEmail) {
+        return userMapper.getUserByEmail(userEmail);
+    }
+
+    @Override
+    public User getUserByTelephone(Long userTelephone) {
+        return userMapper.getUserByTelephone(userTelephone);
+    }
 }

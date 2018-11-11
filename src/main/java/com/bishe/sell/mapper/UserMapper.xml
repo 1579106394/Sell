@@ -75,4 +75,16 @@
         where user_id = #{userId}
     </update>
 
+    <select id="getUserByEmail" resultMap="User">
+        select * from user where
+        user_flag = 1
+        and user_email = #{value}
+    </select>
+
+    <select id="getUserByTelephone" resultMap="User">
+        select * from user where
+        user_flag = 1 and
+        user_telephone = #{value}
+    </select>
+
 </mapper>

@@ -1,8 +1,12 @@
 package com.bishe.sell.controller;
 
+import com.bishe.sell.pojo.Comment;
 import com.bishe.sell.pojo.Goods;
+import com.bishe.sell.pojo.History;
 import com.bishe.sell.pojo.Type;
+import com.bishe.sell.service.CommentService;
 import com.bishe.sell.service.GoodsService;
+import com.bishe.sell.service.HistoryService;
 import com.bishe.sell.service.TypeService;
 import com.bishe.sell.utils.Page;
 import org.apache.commons.io.FilenameUtils;
@@ -28,6 +32,12 @@ public class GoodsController {
 
     @Autowired
     private TypeService typeService;
+
+    @Autowired
+    private HistoryService historyService;
+
+    @Autowired
+    private CommentService commentService;
 
     /**
      * 查看商品列表
@@ -157,7 +167,12 @@ public class GoodsController {
         return "redirect:/api/goods/admin/goodsList.html";
     }
 
-
+    /**
+     * 查看商品信息
+     * @param goodsId
+     * @param model
+     * @return
+     */
     @RequestMapping("readGoods/{goodsId}.html")
     public String readGoodsById(@PathVariable String goodsId, Model model) {
 
@@ -168,7 +183,36 @@ public class GoodsController {
 
         model.addAttribute("goods", goods);
 
+        // 查询这个商品的出价历史
+        List<History> historyList = historyService.getHistoryListByGoodsId(goodsId);
+        model.addAttribute("historyList", historyList);
+
+        // 查询这个商品的评论
+        List<Comment> commentList = commentService.getCommentListByGoodsId(goodsId);
+        model.addAttribute("commentList", commentList);
+
+
         return "item-info";
+    }
+
+    /**
+     * 用户界面分页查询商品列表
+     * @param typeId
+     * @param p
+     * @param model
+     * @return
+     */
+    @RequestMapping("goodsList{typeId}.html")
+    public String goodsList(@PathVariable  String typeId, Page p, Model model) {
+
+        if(StringUtils.isNotBlank(typeId)) {
+            p.getParams().put("typeId", typeId);
+        }
+        p.setCurrentCount(10);
+        Page page = goodsService.getGoodsList(p);
+        model.addAttribute("page", page);
+
+        return "item-list";
     }
 
 }

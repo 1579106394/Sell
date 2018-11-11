@@ -25,4 +25,10 @@ public interface UserService {
 
     // 切换身份（管理员、用户）
     void updateUserAdminById(String userId);
+
+    // 根据邮箱查询用户
+    User getUserByEmail(String userEmail);
+
+    // 根据手机号查询用户
+    User getUserByTelephone(Long userTelephone);
 }

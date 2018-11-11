@@ -36,8 +36,13 @@
     <select id="getNewsList" parameterType="page" resultMap="News">
         select * from news left JOIN user on news_user = user_id
         where news_flag = 1
-        <if test="search != null and search != ''">
-            and news_title like '%${search}%'
+        <if test="params != null">
+            <if test="params.newsUser != null and params.newsUser != null">
+                and user_niko like '%${params.newsUser}%'
+            </if>
+            <if test="params.newsTitle != null and params.newsTitle != null">
+                and news_title like '%${params.newsTitle}%'
+            </if>
         </if>
         order by news_created_time desc
         limit #{index}, #{currentCount}
@@ -46,8 +51,13 @@
     <select id="getNewsCount" parameterType="page" resultType="Integer">
         select count(*) from news left JOIN user on news_user = user_id
         where news_flag = 1
-        <if test="search != null and search != ''">
-           and news_title like '%${search}%'
+        <if test="params != null">
+            <if test="params.newsUser != null and params.newsUser != null">
+                and user_niko like '%${params.newsUser}%'
+            </if>
+            <if test="params.newsTitle != null and params.newsTitle != null">
+                and news_title like '%${params.newsTitle}%'
+            </if>
         </if>
         order by news_created_time desc
     </select>

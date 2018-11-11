@@ -34,17 +34,17 @@ public class Page<T> implements Serializable {
 	private List<T> list = new ArrayList<T>();
 
 	/**
-	 * @return the param
+	 * @return the params
 	 */
 	public Map<String, Object> getParams() {
 		return params;
 	}
 
 	/**
-	 * @param param the param to set
+	 * @param params the param to set
 	 */
-	public void setParams(Map<String, Object> param) {
-		this.params = param;
+	public void setParams(Map<String, Object> params) {
+		this.params = params;
 	}
 
 	/**

@@ -59,7 +59,7 @@ public class NewsServiceImpl implements NewsService {
         //总条数
         p.setTotalCount(totalCount);
         //总页数
-        p.setTotalPage((int) Math.ceil(totalCount / 10.0));
+        p.setTotalPage((int) Math.ceil(totalCount * 1.0 / p.getCurrentCount()));
         p.setList(newsList);
 
         return p;

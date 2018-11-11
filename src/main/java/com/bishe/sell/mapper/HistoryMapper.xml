@@ -3,16 +3,16 @@
 <mapper namespace="com.bishe.sell.mapper.HistoryMapper">
 
     <resultMap id="History" type="history">
-        <id column="history_id" property="historyId" />
-        <result column="history_price" property="historyPrice" />
-        <result column="history_created_time" property="historyCreatedTime" />
-        <result column="history_flag" property="historyFlag" />
+        <id column="history_id" property="historyId"/>
+        <result column="history_price" property="historyPrice"/>
+        <result column="history_created_time" property="historyCreatedTime"/>
+        <result column="history_flag" property="historyFlag"/>
         <association property="user" javaType="user">
             <id column="user_id" property="userId"/>
             <result column="username" property="username"/>
             <result column="password" property="password"/>
-            <result column="user_niko" property="userNiko" />
-            <result column="user_img" property="userImg" />
+            <result column="user_niko" property="userNiko"/>
+            <result column="user_img" property="userImg"/>
             <result column="user_email" property="userEmail"/>
             <result column="user_sex" property="userSex"/>
             <result column="user_telephone" property="userTelephone"/>
@@ -42,5 +42,64 @@
             </association>
         </association>
     </resultMap>
+
+    <select id="addPriceHistory" parameterType="history">
+        insert into history values
+        (
+          #{historyId}, #{user.userId}, #{goods.goodsId},
+          #{historyPrice}, #{historyCreatedTime},
+          #{historyFlag}
+        )
+    </select>
+
+    <select id="getHistoryListByGoodsId" resultMap="History">
+        select * from history LEFT JOIN goods on history_goods = goods_id
+        left JOIN user on history_user = user_id
+        where history_goods = #{value} and history_flag = 1
+        order by history_created_time desc
+        limit 0, 10
+    </select>
+
+    <select id="getHistoryList" parameterType="page" resultMap="History">
+        select * from history LEFT JOIN goods on history_goods = goods_id
+        left JOIN user on history_user = user_id
+        where history_flag = 1
+        order by goods_created_time desc, history_created_time desc
+        limit #{index}, #{currentCount}
+    </select>
+
+    <select id="getHistoryCount" parameterType="page" resultType="Integer">
+        select count(*) from history LEFT JOIN goods on history_goods = goods_id
+        left JOIN user on history_user = user_id
+        where history_flag = 1
+        order by goods_created_time desc, history_created_time desc
+    </select>
+
+    <update id="deleteHistory">
+        update history set
+        history_flag = 2
+        where history_id = #{value}
+    </update>
+
+    <select id="getHistoryById" resultMap="History">
+        select * from history LEFT JOIN goods on history_goods = goods_id
+        left JOIN user on history_user = user_id
+        where history_flag = 1
+        and history_id = #{value}
+    </select>
+
+    <select id="getTopPriceByGoodsId" resultType="Double">
+        select history_price from history LEFT JOIN goods on history_goods = goods_id
+        left JOIN user on history_user = user_id
+        where goods_id = #{value} and history_flag = 1 and goods_flag != 2
+        order by history_price desc
+        limit 1
+    </select>
+
+    <select id="getAllHistoryList" resultMap="History">
+        select * from history LEFT JOIN goods on history_goods = goods_id
+        left JOIN user on history_user = user_id
+        where history_flag = 1
+    </select>
 
 </mapper>

@@ -20,9 +20,9 @@
             var currentPrice = '${goods.goodsCurrentPrice}'
             var id = '${goods.goodsId}'
             var myPrice = $('#currentPrice').val()
-            if(myPrice <= currentPrice) {
+            if (parseFloat(myPrice) <= parseFloat(currentPrice)) {
                 alert("喊价不能低于当前价格！")
-            }else {
+            } else {
                 $('#form').submit()
             }
         }
@@ -39,7 +39,7 @@
             <a href="${pageContext.request.contextPath}/index.html">首页</a>
         </li>
         <li>
-            <a href="#">商品列表</a>
+            <a href="${pageContext.request.contextPath}/api/goods/goodsList.html">商品列表</a>
         </li>
         <li class="active">商品详情</li>
     </ol>
@@ -54,9 +54,6 @@
         <!-- 左边轮播 -->
         <div class="info-top-left" style="height: 100%;">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height: 100%;">
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                </ol>
                 <div class="carousel-inner" role="listbox" style="height: 100%;">
                     <div class="item active" style="height: 100%;">
                         <img src="${pageContext.request.contextPath}/${goods.goodsImg}" alt="..." style="height: 100%;">
@@ -79,15 +76,20 @@
             <p>当前出价￥${goods.goodsCurrentPrice}</p>
             <p>出价人数 ${goods.goodsPriceNum}</p>
             <p>
-            <div class="input-group">
-                <form action="" id="form" method="post">
+            <form action="${pageContext.request.contextPath}/api/history/addPriceHistory.html" id="form" method="post">
+                <%--隐藏域，商品id--%>
+                <input type="hidden" name="goods.goodsId" value="${goods.goodsId}"/>
+                <%--隐藏域，用户id--%>
+                <input type="hidden" name="user.userId" value="${sessionScope.user.userId}"/>
+                <div class="input-group">
+
                     <input type="text" class="form-control"
-                           value="${goods.goodsCurrentPrice}" placeholder="价格" id="currentPrice" name="currentPrice">
+                           value="${goods.goodsCurrentPrice}" placeholder="价格" id="currentPrice" name="historyPrice">
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button" class="addPrice()">我要喊价</button>
+                        <button class="btn btn-danger" type="button" onclick="addPrice()">我要喊价</button>
                     </span>
-                </form>
-            </div>
+                </div>
+            </form>
             </p>
         </div>
     </div>
@@ -131,48 +133,25 @@
             <!-- 出价历史 -->
             <div role="tabpanel" class="tab-pane active info-history-price" id="price">
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="user-img">
-                            <img src="img/1.jpg" width="100%" height="100%">
-                        </div>
-                        <div class="price-info">
-                            <p>
-                                <span class="username">用户名</span>
-                            </p>
-                            <p>
-                                <span class="price-price">￥111元</span>
-                                <span class="price-date">2017-11-11 11:11:11</span>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="user-img">
-                            <img src="img/1.jpg" width="100%" height="100%">
-                        </div>
-                        <div class="price-info">
-                            <p>
-                                <span class="username">用户名</span>
-                            </p>
-                            <p>
-                                <span class="price-price">￥111元</span>
-                                <span class="price-date">2017-11-11 11:11:11</span>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="user-img">
-                            <img src="img/1.jpg" width="100%" height="100%">
-                        </div>
-                        <div class="price-info">
-                            <p>
-                                <span class="username">用户名</span>
-                            </p>
-                            <p>
-                                <span class="price-price">￥111元</span>
-                                <span class="price-date">2017-11-11 11:11:11</span>
-                            </p>
-                        </div>
-                    </li>
+                    <c:forEach items="${historyList}" var="history">
+
+                        <li class="list-group-item">
+                            <div class="user-img">
+                                <img src="${pageContext.request.contextPath}/${history.user.userImg}" width="100%"
+                                     height="100%">
+                            </div>
+                            <div class="price-info">
+                                <p>
+                                    <span class="username">${history.user.userNiko}</span>
+                                </p>
+                                <p>
+                                    <span class="price-price">￥${history.historyPrice}元</span>
+                                    <span class="price-date">${history.historyCreatedTime}</span>
+                                </p>
+                            </div>
+                        </li>
+
+                    </c:forEach>
                 </ul>
             </div>
             <!-- 出价历史结束 -->
@@ -180,55 +159,42 @@
             <!-- 评论内容 -->
             <div role="tabpanel" class="tab-pane info-history-comment" id="comment">
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="user-img">
-                            <img src="img/1.jpg" width="100%" height="100%">
-                        </div>
-                        <div class="price-info">
-                            <p>
-                                <span class="username">用户名</span>
-                                <span class="price-date">2017-11-11 11:11:11</span>
-                            </p>
-                            <p>
+                    <c:forEach items="${commentList}" var="comment">
+                        <li class="list-group-item">
+                            <div class="user-img">
+                                <img src="${pageContext.request.contextPath}/${comment.user.userImg}" width="100%" height="100%">
+                            </div>
+                            <div class="price-info">
+                                <p>
+                                    <span class="username">${comment.user.userNiko}</span>
+                                    <span class="price-date">${comment.commentCreatedTime}</span>
+                                </p>
+                                <p>
                                     <span class="comment-info">
-                                            卖家服务态度很好，货很有艺术感，值得收藏与玩弄，大师级的作品就是不一样的,作哈哈品非常值得大家。
+                                     ${comment.commentArticle}
                                     </span>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="user-img">
-                            <img src="img/1.jpg" width="100%" height="100%">
-                        </div>
-                        <div class="price-info">
-                            <p>
-                                <span class="username">用户名</span>
-                                <span class="price-date">2017-11-11 11:11:11</span>
-                            </p>
-                            <p>
-                                    <span class="comment-info">
-                                            卖家服务态度很好，货很有艺术感，值得收藏与玩弄，大师级的作品就是不一样的,作哈哈品非常值得大家。
-                                    </span>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="user-img">
-                            <img src="img/1.jpg" width="100%" height="100%">
-                        </div>
-                        <div class="price-info">
-                            <p>
-                                <span class="username">用户名</span>
-                                <span class="price-date">2017-11-11 11:11:11</span>
-                            </p>
-                            <p>
-                                    <span class="comment-info">
-                                            卖家服务态度很好，货很有艺术感，值得收藏与玩弄，大师级的作品就是不一样的,作哈哈品非常值得大家。
-                                    </span>
-                            </p>
-                        </div>
-                    </li>
+                                </p>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </ul>
+
+                <!-- 评论框 -->
+                <div class="comment-textarea">
+                    <form action="${pageContext.request.contextPath}/api/comment/addComment.html" method="POST"
+                          role="form">
+                        <legend>发表评论</legend>
+                        <%--隐藏域，商品id--%>
+                        <input type="hidden" name="goods.goodsId" value="${goods.goodsId}"/>
+                        <%--隐藏域，用户id--%>
+                        <input type="hidden" name="user.userId" value="${sessionScope.user.userId}"/>
+
+                        <textarea class="form-control" rows="3" name="commentArticle"></textarea>
+                        <br>
+                        <button type="submit" class="btn btn-primary">评论</button>
+                    </form>
+                </div>
+                <!-- 评论框结束 -->
             </div>
             <!-- 评论内容结束 -->
         </div>

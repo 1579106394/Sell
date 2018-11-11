@@ -67,6 +67,39 @@ public class UserController {
         }
 
         user.setUserImg("photo\\" + name + "." + ext);
+
+        //校验手机号和邮箱是否重复
+        // 根据邮箱查询用户，如果邮箱已存在，提示
+        String userEmail = user.getUserEmail();
+        if(!userEmail.matches("^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$")) {
+            // 邮箱格式不匹配、
+            model.addAttribute("error", "邮箱格式不正确！");
+            model.addAttribute("user", user);
+            return "admin/user/myinfo";
+        }
+        User u1 = userService.getUserByEmail(userEmail);
+        if (u1 != null) {
+            model.addAttribute("error", "该邮箱已存在！");
+            model.addAttribute("user", user);
+            return "admin/user/myinfo";
+        }
+
+        // 根据手机号查询用户，如果手机号已存在，提示
+        Long userTelephone = user.getUserTelephone();
+        if(!userTelephone.toString().matches("^[1]([3|5|8][0-9]{1})[0-9]{8}$")) {
+            // 手机号格式不匹配
+            model.addAttribute("error", "手机号格式不正确！");
+            model.addAttribute("user", user);
+            return "admin/user/myinfo";
+        }
+        u1 = userService.getUserByTelephone(userTelephone);
+        if (u1 != null) {
+            model.addAttribute("error", "该手机号已存在！");
+            model.addAttribute("user", user);
+            return "admin/user/myinfo";
+        }
+
+
         userService.editUser(user);
         User u = userService.getUser(user);
         // 修改完毕，将用户信息放回session
@@ -102,7 +135,11 @@ public class UserController {
         return "redirect:/api/user/admin/userList.html";
     }
 
-
+    /**
+     * 切换管理员状态
+     * @param userId
+     * @return
+     */
     @RequestMapping("admin/toAdmin/{userId}.html")
     public String toAdmin(@PathVariable String userId) {
 

@@ -3,6 +3,8 @@ package com.bishe.sell.service;
 import com.bishe.sell.pojo.Goods;
 import com.bishe.sell.utils.Page;
 
+import java.util.List;
+
 public interface GoodsService {
 
     // 查看商品列表
@@ -22,4 +24,10 @@ public interface GoodsService {
 
     // 点击量+1
     void updateClickNum(String goodsId);
+
+    // 根据结束时间查询商品（定时器使用）
+    List<Goods> getGoodsByEndTime(String time);
+
+    // 结束集合中商品的拍卖（定时器使用）
+    void endGoods(List<Goods> goodsList);
 }
