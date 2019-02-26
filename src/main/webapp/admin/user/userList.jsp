@@ -83,8 +83,12 @@
                                     <td class="am-hide-sm-only">普通用户</td>
                                 </c:if>
                                 <c:if test="${user.userRole == 2}">
-
-                                    <td class="am-hide-sm-only">管理员</td>
+                                    <c:if test="${sessionScope.user.username eq 'admin'}">
+                                        <td class="am-hide-sm-only">超级管理员</td>
+                                    </c:if>
+                                    <c:if test="${!sessionScope.user.username eq 'admin'}">
+                                        <td class="am-hide-sm-only">管理员</td>
+                                    </c:if>
                                 </c:if>
 
                                 <td>
@@ -97,15 +101,21 @@
                                                 </a>
                                             </c:if>
                                             <c:if test="${user.userRole == 2}">
-                                                <a href="${pageContext.request.contextPath}/api/user/admin/toAdmin/${user.userId}.html"
-                                                   class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
-                                                        class="am-icon-pencil-square-o"></span> 取消管理员
-                                                </a>
+                                                <c:if test="${sessionScope.user.username eq 'admin'}">
+                                                    <a href="${pageContext.request.contextPath}/api/user/admin/toAdmin/${user.userId}.html"
+                                                       class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                            class="am-icon-pencil-square-o"></span> 取消管理员
+                                                    </a>
+                                                </c:if>
                                             </c:if>
-                                            <a href="${pageContext.request.contextPath}/api/user/admin/deleteUser/${user.userId}.html"
-                                               class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
-                                                    class="am-icon-trash-o"></span> 删除
-                                            </a>
+                                            <c:if test="${user.userRole!=2 or sessionScope.user.username eq 'admin'}">
+                                                <%--用户是普通用户，或者登录用户是超级管理员时才可以删--%>
+                                                <a href="${pageContext.request.contextPath}/api/user/admin/deleteUser/${user.userId}.html"
+                                                   class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                                        class="am-icon-trash-o"></span> 删除
+                                                </a>
+
+                                            </c:if>
                                         </div>
                                     </div>
                                 </td>

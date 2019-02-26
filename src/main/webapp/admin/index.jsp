@@ -17,6 +17,8 @@
 <div class="header">
     <div class="main">
         <a href="index.jsp" style="margin-left: 30px;line-height: 65px; color: white;font-size: 18px;">中国拍卖网系统后台</a>
+        <a href="${pageContext.request.contextPath}/index.html"
+           style="margin-left: 30px;line-height: 65px; color: white;font-size: 18px;">返回前台</a>
         <div class="nav">
 
         </div>
@@ -45,21 +47,40 @@
 <div class="main fly-user-main layui-clear">
 
     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
-        <li class="layui-nav-item layui-this"><a href="${pageContext.request.contextPath}/api/type/admin/typeList.html" target="right"> <i
-                class="layui-icon">&#xe609;</i> 分类管理 </a></li>
-        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/news/admin/newsList.html" target="right"> <i
-                class="layui-icon">&#xe63c;</i> 新闻中心</a></li>
-        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/goods/admin/goodsList.html" target="right"> <i
-                class="layui-icon">&#xe698;</i> 商品管理</a></li>
-        <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/api/history/admin/historyList.html" target="right"> <i
-                class="layui-icon">&#xe60e;</i> 出价历史 </a></li>
-        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/comment/admin/commentList.html" target="right"> <i
-                class="layui-icon">&#xe611;</i> 商品评论</a></li>
-        <%--<li class="layui-nav-item  "><a href="javascript:void(0)" onclick="updatePwd('修改密码',2)"> <i--%>
-                <%--class="layui-icon">&#xe659;</i> 交易历史 </a></li>--%>
-        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/user/admin/userList.html" target="right"> <i
-                class="layui-icon">&#xe770;</i> 用户管理 </a></li>
-        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/user/admin/myinfo.html" target="right"> <i
+        <c:if test="${sessionScope.user.userRole == 2}">
+            <li class="layui-nav-item layui-this"><a
+                    href="${pageContext.request.contextPath}/api/type/admin/typeList.html"
+                    target="right"> <i
+                    class="layui-icon">&#xe609;</i> 分类管理 </a></li>
+        </c:if>
+        <c:if test="${sessionScope.user.userRole == 2}">
+            <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/news/admin/newsList.html"
+                                           target="right"> <i
+                    class="layui-icon">&#xe63c;</i> 新闻中心</a></li>
+        </c:if>
+            <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/goods/admin/goodsList.html"
+                                           target="right"> <i
+                    class="layui-icon">&#xe698;</i> 商品管理</a></li>
+        <c:if test="${sessionScope.user.userRole == 2}">
+            <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/admin/goodsExam/goodsList.jsp"
+                                           target="right"> <i
+                    class="layui-icon">&#xe672;</i> 商品审核</a></li>
+        </c:if>
+        <c:if test="${sessionScope.user.userRole == 2}">
+            <li class="layui-nav-item"><a href="${pageContext.request.contextPath}/api/history/admin/historyList.html"
+                                          target="right"> <i
+                    class="layui-icon">&#xe60e;</i> 出价历史 </a></li>
+        </c:if>
+        <c:if test="${sessionScope.user.userRole == 2}">
+            <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/comment/admin/commentList.html"
+                                           target="right"> <i
+                    class="layui-icon">&#xe611;</i> 商品评论</a></li>
+            <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/user/admin/userList.html"
+                                           target="right"> <i
+                    class="layui-icon">&#xe770;</i> 用户管理 </a></li>
+        </c:if>
+        <li class="layui-nav-item "><a href="${pageContext.request.contextPath}/api/user/admin/myinfo.html"
+                                       target="right"> <i
                 class="layui-icon">&#xe716;</i> 个人信息 </a></li>
     </ul>
 

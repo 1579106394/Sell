@@ -86,7 +86,9 @@
                     <input type="text" class="form-control"
                            value="${goods.goodsCurrentPrice}" placeholder="价格" id="currentPrice" name="historyPrice">
                     <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button" onclick="addPrice()">我要喊价</button>
+                        <c:if test="${sessionScope.user.userRole==1 }">
+                            <button class="btn btn-danger" type="button" onclick="addPrice()">我要喊价</button>
+                        </c:if>
                     </span>
                 </div>
             </form>

@@ -53,6 +53,9 @@
             <if test="params.goodsTitle != null and params.goodsUser != ''">
                 and goods_title like '%${params.goodsTitle}%'
             </if>
+            <if test="params.userId != null and params.userId != ''">
+                and user_id = #{params.userId}
+            </if>
         </if>
         order by goods_created_time desc
         limit #{index}, #{currentCount}
@@ -73,6 +76,9 @@
             </if>
             <if test="params.goodsTitle != null and params.goodsUser != ''">
                 and goods_title like '%${params.goodsTitle}%'
+            </if>
+            <if test="params.userId != null and params.userId != ''">
+                and user_id = #{params.userId}
             </if>
         </if>
         order by goods_created_time desc

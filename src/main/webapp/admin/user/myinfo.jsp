@@ -35,6 +35,7 @@
                           style="padding-top: 30px;" enctype="multipart/form-data">
 
                         <input type="hidden" name="userId" value="${user.userId}" />
+                        <input type="hidden" name="username" value="${user.username}" />
 
                         <div class="am-form-group">
                             <label class="am-u-sm-2 am-form-label">

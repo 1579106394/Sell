@@ -61,7 +61,7 @@ public class UserController {
         String ext = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
 
         try {
-            uploadFile.transferTo(new File("F:\\sell\\photo\\" + name + "." + ext));
+            uploadFile.transferTo(new File("C:\\sell\\photo\\" + name + "." + ext));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,6 +71,9 @@ public class UserController {
         //校验手机号和邮箱是否重复
         // 根据邮箱查询用户，如果邮箱已存在，提示
         String userEmail = user.getUserEmail();
+
+        User oldUser = userService.getUserByUsername(user);
+
         if(!userEmail.matches("^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$")) {
             // 邮箱格式不匹配、
             model.addAttribute("error", "邮箱格式不正确！");
@@ -78,7 +81,7 @@ public class UserController {
             return "admin/user/myinfo";
         }
         User u1 = userService.getUserByEmail(userEmail);
-        if (u1 != null) {
+        if (u1 != null && !u1.getUserEmail().equals(oldUser.getUserEmail())) {
             model.addAttribute("error", "该邮箱已存在！");
             model.addAttribute("user", user);
             return "admin/user/myinfo";
@@ -93,7 +96,7 @@ public class UserController {
             return "admin/user/myinfo";
         }
         u1 = userService.getUserByTelephone(userTelephone);
-        if (u1 != null) {
+        if (u1 != null && !u1.getUserTelephone().equals(oldUser.getUserTelephone())) {
             model.addAttribute("error", "该手机号已存在！");
             model.addAttribute("user", user);
             return "admin/user/myinfo";

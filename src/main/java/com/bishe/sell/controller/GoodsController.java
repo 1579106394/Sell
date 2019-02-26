@@ -4,6 +4,7 @@ import com.bishe.sell.pojo.Comment;
 import com.bishe.sell.pojo.Goods;
 import com.bishe.sell.pojo.History;
 import com.bishe.sell.pojo.Type;
+import com.bishe.sell.pojo.User;
 import com.bishe.sell.service.CommentService;
 import com.bishe.sell.service.GoodsService;
 import com.bishe.sell.service.HistoryService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -47,7 +49,12 @@ public class GoodsController {
      * @return
      */
     @RequestMapping("admin/goodsList.html")
-    public String adminGoodsList(Model model, Page<Goods> p) {
+    public String adminGoodsList(Model model, Page<Goods> p, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if(user.getUserRole()==1) {
+            // 是个人用户
+            p.getParams().put("userId", user.getUserId());
+        }
         p = goodsService.getGoodsList(p);
 
         model.addAttribute("page", p);
@@ -89,7 +96,7 @@ public class GoodsController {
             String fileName = name + "." + ext;
 
             try {
-                goodsPhoto.transferTo(new File("F:\\sell\\photo\\" + fileName));
+                goodsPhoto.transferTo(new File("C:\\sell\\photo\\" + fileName));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -154,7 +161,7 @@ public class GoodsController {
             String fileName = name + "." + ext;
 
             try {
-                goodsPhoto.transferTo(new File("F:\\sell\\photo\\" + fileName));
+                goodsPhoto.transferTo(new File("C:\\sell\\photo\\" + fileName));
             } catch (IOException e) {
                 e.printStackTrace();
             }

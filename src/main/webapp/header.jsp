@@ -18,7 +18,12 @@
         </c:if>
         <c:if test="${sessionScope.user != null}">
             <a class="btn btn-default">${sessionScope.user.userNiko}</a>
-            <a href="${pageContext.request.contextPath}/admin/index.jsp" class="btn btn-default">后台管理</a>
+            <c:if test="${sessionScope.user.userRole == 1}">
+                <a href="${pageContext.request.contextPath}/admin/index.jsp" class="btn btn-default">个人中心</a>
+            </c:if>
+            <c:if test="${sessionScope.user.userRole == 2}">
+                <a href="${pageContext.request.contextPath}/admin/index.jsp" class="btn btn-default">后台管理</a>
+            </c:if>
             <a href="${pageContext.request.contextPath}/api/user/logout.html" class="btn btn-default">注销</a>
         </c:if>
     </div>
@@ -52,7 +57,7 @@
     window.onload = function () {
 
         $.ajax({
-            url: "/api/type/typeList.action",
+            url: "${pageContext.request.contextPath}/api/type/typeList.action",
             type: "get",
             dataType: "json",
             contentType: "application/json;charset=UTF-8",
